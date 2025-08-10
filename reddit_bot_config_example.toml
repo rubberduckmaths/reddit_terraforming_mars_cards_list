@@ -1,0 +1,18 @@
+[reddit]
+client_id = "<YOUR_CLIENT_ID>"
+client_secret = "<YOUR_CLIENT_SECRET>"
+username = "<YOUR_REDDIT_USERNAME>"
+password = "<YOUR_REDDIT_PASSWORD>"
+user_agent = "tmars-bot/0.1 by AReallyGoodName"
+
+[bot]
+subreddit = "terraformingmarsgame"
+cards_csv = "data/cards.csv"
+# Optional footer appended to replies (set empty "" to disable)
+reply_footer = ""
+# If true, prints to console instead of replying on Reddit
+dry_run = false
+# Path for persisted state of replied comment IDs
+state_file = "data/state.json"
+# Maximum cards to include in one reply (safety/length guard)
+max_cards_per_reply = 8
