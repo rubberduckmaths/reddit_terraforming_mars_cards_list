@@ -39,6 +39,8 @@ def load_cards_from_csv(csv_path: str | Path) -> List[Card]:
             logger.error("CSV missing required columns: %s", missing)
             raise ValueError(f"CSV missing required columns: {missing}")
 
+        has_number = "Number" in (reader.fieldnames or [])
+
         for i, row in enumerate(reader, start=2):  # start=2 accounts for header line
             try:
                 name = (row["Name"] or "").strip()
@@ -46,14 +48,30 @@ def load_cards_from_csv(csv_path: str | Path) -> List[Card]:
                 description = (row["Description"] or "").strip()
                 tags = _split_multi(row.get("Tags", ""))
                 aliases = _split_multi(row.get("Aliases", ""))
+                number = (row["Number"].strip() if has_number and row.get("Number") is not None else None)
+
                 if not name:
                     logger.debug("Skipping row %d: empty name", i)
                     continue
                 tags = [t.strip() for t in tags if t.strip()]
                 aliases = [a.strip() for a in aliases if a.strip()]
-                cards.append(Card(name=name, cost=cost, description=description, tags=tags, aliases=aliases))
-                logger.debug("Loaded card '%s' (cost=%s, tags=%d, aliases=%d) from row %d",
-                             name, cost, len(tags), len(aliases), i)
+                cards.append(Card(
+                    name=name,
+                    cost=cost,
+                    description=description,
+                    tags=tags,
+                    aliases=aliases,
+                    number=number or None,
+                ))
+                logger.debug(
+                    "Loaded card '%s' (cost=%s, tags=%d, aliases=%d%s) from row %d",
+                    name,
+                    cost,
+                    len(tags),
+                    len(aliases),
+                    f', number="{number}"' if number else "",
+                    i,
+                )
             except Exception:
                 logger.exception("Skipping malformed row %d due to parse error", i)
                 continue

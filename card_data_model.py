@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 
 
 @dataclass(frozen=True)
@@ -9,3 +9,4 @@ class Card:
     description: str
     tags: List[str]
     aliases: List[str]
+    number: Optional[str] = None  # optional: present if CSV has "Number"
