@@ -1,2 +1,4 @@
 # Ignore local config
 config.toml
+__pycache__/*
+.idea/*

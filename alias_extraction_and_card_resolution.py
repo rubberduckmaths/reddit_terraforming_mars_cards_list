@@ -1,8 +1,9 @@
 import re
 import json
-from typing import Iterable, List, Tuple, Set
+from typing import List, Set
 
 from card_data_model import Card
+from formatCardHeading import format_card_heading
 
 # Match [ALIAS] but not markdown link text [text](url)
 # (?!\() ensures ']' isn't immediately followed by '('
@@ -78,7 +79,7 @@ def format_card_reply(cards: List[Card], footer: str = "") -> str:
         sections: List[str] = []
 
         # Card name (bold)
-        sections.append(f"Card: **{c.name}**")
+        sections.append(f"Card: **{format_card_heading(c)}**")
 
         # Cost handling
         cost_raw = (c.cost or "").strip()
