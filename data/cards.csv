@@ -1,6 +1,6 @@
 Number,Name,Cost,Description,Tags,Aliases
 #001,Colonizer Training Camp,8,Oxygen must be 5% or less. 2 VP.,"[""building"", ""jovian""]",[]
-#002,Asteroid Mining Consortium,13,Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step. 1 VP.,"[""jovian""]",[]
+#002,Asteroid Mining Consortium,13,Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step. 1 VP.,"[""jovian""]","[""AMC""]"
 #003,Deep Well Heating,13,Increase your Energy production 1 step. Increase temperature 1 step.,"[""building"", ""power""]",[]
 #004,Cloud Seeding,11,Requires 3 ocean tiles. Decrease your MC production 1 step and any heat production 1 step. Increase your Plant production 2 steps.,[],[]
 #005,Search for Life,3,"Action: Spend 1 MC to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here. 3 VPs if you have one or more Science resources here. 3/ VP.","[""science""]",[]
