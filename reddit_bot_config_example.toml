@@ -16,3 +16,11 @@ dry_run = false
 state_file = "data/state.json"
 # Maximum cards to include in one reply (safety/length guard)
 max_cards_per_reply = 8
+
+[discord]
+token = "<YOUR_DISCORD_BOT_TOKEN>"
+guild_id = 123456789012345678
+cards_csv = "data/cards.csv"
+reply_footer = ""
+max_cards_per_message = 8
+dry_run = false
