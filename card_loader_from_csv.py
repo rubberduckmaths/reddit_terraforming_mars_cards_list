@@ -1,5 +1,6 @@
 import csv
 import logging
+import json
 from pathlib import Path
 from typing import Iterable, List
 
@@ -12,15 +13,30 @@ logger = logging.getLogger(__name__)
 
 def _split_multi(value: str) -> List[str]:
     """
-    Split multi-value fields by common separators and normalize.
+    Parse multi-value fields. Prefer JSON arrays (e.g., ["A","B"]) when present,
+    otherwise fall back to splitting by comma/pipe.
     """
     if not value:
         return []
-    parts = []
+
+    s = value.strip()
+    # Try to parse JSON-style arrays first
+    if s.startswith("[") and s.endswith("]"):
+        try:
+            data = json.loads(s)
+            if isinstance(data, list):
+                return [str(item).strip() for item in data if str(item).strip()]
+        except Exception:
+            logger.debug("Failed to parse JSON array from value: %r; falling back to split", value)
+
+    # Fallback: split by comma/pipe
+    parts: List[str] = []
     for chunk in value.replace("|", ",").split(","):
-        s = chunk.strip()
-        if s:
-            parts.append(s)
+        token = chunk.strip().strip('"').strip("'").strip()
+        # Also trim any stray leading/trailing brackets from non-JSON cases
+        token = token.lstrip("[").rstrip("]")
+        if token:
+            parts.append(token)
     return parts
 
 

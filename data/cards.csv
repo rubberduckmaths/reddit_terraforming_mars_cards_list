@@ -21,7 +21,7 @@ Number,Name,Cost,Description,Tags,Aliases
 #020,Research Outpost,18,"Effect: When you play a card, you pay 1 MC less for it. Place a city tile NEXT TO NO OTHER TILE.","[""building"", ""city"", ""science""]",[]
 #021,Phobos Space Haven,25,Increase your titanium production 1 step and place a City tile ON THE RESERVED AREA. 3 VP.,"[""space"", ""city""]",[]
 #022,Black Polar Dust,15,Place an ocean tile. Decrease your MC production 2 steps and increase your heat production 3 steps.,[],[]
-#023,Arctic Algae,12,"Effect: When anyone places an ocean tile, gain 2 Plants. It must be -12 C or colder to play. Gain 1 Plant.","[""plant""]",[]
+#023,Arctic Algae,12,"Effect: When anyone places an ocean tile, gain 2 Plants. It must be -12 C or colder to play. Gain 1 Plant.","[""plant""]","[""AA""]"
 #024,Predators,14,Action: Remove 1 Animal from any card and add it to this card. Requires 11% oxygen. 1 VP per Animal on this card.,"[""animal""]",[]
 #025,Space Station,10,"Effect: When you play a Space card, you pay 2 MC less for it. 1 VP.","[""space""]","[""Orbital Station"", ""SS""]"
 #026,EOS Chasma National Park,16,Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your MC production 2 steps. 1 VP.,"[""building"", ""plant""]",[]
@@ -168,7 +168,7 @@ Number,Name,Cost,Description,Tags,Aliases
 #167,Import of Advanced GHG,9,Increase your heat production 2 steps.,"[""event"", ""space"", ""earth""]","[""Advanced GHG"", ""GHG Import+""]"
 #168,Windmills,6,Requires 7% oxygen. Increase your Energy production 1 step. 1 VP.,"[""building"", ""power""]",[]
 #169,Tundra Farming,16,Requires -6 C or warmer. Increase your Plant production 1 step and your MC production 2 steps. Gain 1 Plant. 2 VP.,"[""plant""]",[]
-#170,Aerobraked Ammonia Asteroid,26,Add 2 Microbes to ANOTHER card. Increase your heat production 3 steps and your Plant productions 1 step.,"[""event"", ""space""]",[]
+#170,Aerobraked Ammonia Asteroid,26,Add 2 Microbes to ANOTHER card. Increase your heat production 3 steps and your Plant productions 1 step.,"[""event"", ""space""]","[""AAA""]"
 #171,Magnetic Field Dome,5,Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.,"[""building""]",[]
 #172,Pets,10,"Effect: When any City tile is placed, add an Animal to this card. Add 1 Animal to this card. 1 VP per 2 Animals here. Animals may not be removed from this card.","[""animal"", ""earth""]","[""Puppies and Kittens"", ""Furry Friends""]"
 #173,Protected Habitats,5,"Opponents may not remove your plants, animals or microbes.",[],[]
@@ -182,7 +182,7 @@ Number,Name,Cost,Description,Tags,Aliases
 #181,Ice Cap Melting,5,Requires +2 C or warmer. Place 1 ocean tile.,"[""event""]","[""ICM"", ""Icecap""]"
 #182,Corporate Stronghold,11,Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City tile. -2 VP.,"[""building"", ""city""]","[""Corp Stronghold"", ""Stronghold""]"
 #183,Biomass Combustors,4,Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps. -1 VP.,"[""building"", ""power""]",[]
-#184,Livestock,13,Action: Add 1 Animal to this card. Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps. 1 VP for each Animal on this card.,"[""animal""]",[]
+#184,Livestock,13,Action: Add 1 Animal to this card. Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps. 1 VP for each Animal on this card.,"[""animal""]","[""Cow"",""Moo"",""Steak""]"
 #185,Olympus Conference,10,"When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card. 1 VP.","[""building"", ""earth"", ""science""]",[]
 #186,Rad-Suits,6,Requires two cities in play. Increase your MC up 1 step. 1 VP.,[],"[""Radsuits"", ""Hazmat Suits""]"
 #187,Aquifer Pumping,18,Action: Spend 8 MC to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.,"[""building""]",[]
@@ -393,8 +393,8 @@ Number,Name,Cost,Description,Tags,Aliases
 ,Ecoline,N/A,"You start with 2 plant production, 3 plants, and 36MC Effect: You may always pay 7 plants, instead of 8, to place greenery.","[""plant""]",[]
 ,Helion,N/A,You start with 3 heat production and 42 MC. Effect: Your may use heat as MC. You may not use MC as heat.,"[""space""]",[]
 ,Mining Guild,N/A,"You start with 30 MC, 5 steel, and 1 steel production Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.","[""building"", ""building""]",[]
-,Interplanetary,N/A,"You start with 20 steel and 30 MC. Effect: Each time you play an event, you gain 2 MC.","[""building""]",[]
-,X Inventrix,N/A,"45 As your first action in the game, draw 3 cards. Start with 45MC. Effect: Your temperature, oxygen and ocean requirements are +2 or -2 steps, your choice in each case.","[""science""]",[]
+,Interplanetary Cinematics,N/A,"You start with 20 steel and 30 MC. Effect: Each time you play an event, you gain 2 MC.","[""building""]",[]
+,Inventrix,N/A,"45 As your first action in the game, draw 3 cards. Start with 45MC. Effect: Your temperature, oxygen and ocean requirements are +2 or -2 steps, your choice in each case.","[""science""]",[]
 ,Phobolog,N/A,You start with 10 titanium and 23 MC. Effect: Your titanium resources are each worth 1 MC extra.,"[""space""]",[]
 ,Tharsis Republic,N/A,"40 You start with 40 MC. As your first action in the game, place a city tile. Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.","[""building""]",[]
 ,Thorgate,N/A,"You start with 1 energy production and 48 MC. Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 MC less for it.","[""power""]",[]
@@ -422,7 +422,7 @@ Number,Name,Cost,Description,Tags,Aliases
 ,Terralabs,N/A,You start with 14 MC. Lower your TR 1 step. Effect: Buying cards to hand costs 1MC.,"[""earth"", ""science""]",[]
 ,Utopia Invest,N/A,You start with 40 MC. Increase your steel and titanium production 1 step each. Effect: Action: Decrease any production to gain 4 resources of that kind.,"[""building""]",[]
 ,Factorum,N/A,"You start with 37 MC. Increase your steel production 1 step. Effect: Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.","[""building"", ""power""]",[]
-,▲ Mons Insurance,N/A,"You start with 48 MC. Increase your MC production 4 steps. ALL OPPONENTS DECREASE THEIR MC PRODUCTION 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW. Effect: When a player causes another player to decrease production or lose resources, pay 3MC to the victim, or as much as possible.",[],[]
+,Mons Insurance,N/A,"You start with 48 MC. Increase your MC production 4 steps. ALL OPPONENTS DECREASE THEIR MC PRODUCTION 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW. Effect: When a player causes another player to decrease production or lose resources, pay 3MC to the victim, or as much as possible.",[],[]
 ,Philares,N/A,"You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step. Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice regardless of who just placed a tile.","[""building""]",[]
 ,Arcadian Communities,N/A,"You start with 40 MC and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY PLAYER MARKER ON A NON-RESERVED AREA.",[],[]
 ,Recyclon,N/A,"You start with 38 MC and 1 steel production. Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.","[""building"", ""microbe""]",[]
@@ -446,7 +446,7 @@ Number,Name,Cost,Description,Tags,Aliases
 #P08,Donation,N/A,Prelude. Gain 21 MC.,[],[]
 #P09,Early Settlement,N/A,Prelude. Increase your plant production 1 step. Place a city tile.,"[""building"", ""city""]",[]
 #P10,Ecology Experts,N/A,"Prelude. Increase your plant production 1 step. Play a card from hand, ignoring global requirements.","[""microbe"", ""plant""]",[]
-#P11,Excentric Sponsor,N/A,Prelude. Play 1 card from hand with a 25 MC reduction.,[],[]
+#P11,Eccentric Sponsor,N/A,Prelude. Play 1 card from hand with a 25 MC reduction.,[],[]
 #P12,Experimental Forest,N/A,Prelude. Place 1 Greenery tile. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.,"[""plant""]",[]
 #P13,Galilean Mining,N/A,Prelude. Increase your titanium production 2 steps. Pay 5 MC.,"[""jovian""]",[]
 #P14,Great Aquifer,N/A,Prelude. Place 2 Ocean tiles.,[],[]

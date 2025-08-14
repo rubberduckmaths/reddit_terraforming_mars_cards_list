@@ -90,7 +90,7 @@ class CardIndex:
             return None
 
         # Guardrail: require “close enough” distance
-        max_allowed = max(2, len(norm_tok) // 3)
+        max_allowed = max(2, len(norm_tok) // 2)
         if best_dist <= max_allowed:
             return self.by_alias.get(best_key)
 

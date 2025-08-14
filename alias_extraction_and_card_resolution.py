@@ -53,10 +53,7 @@ def _normalize_tags(raw_tags: List[str]) -> List[str]:
     for item in raw_tags:
         if not item:
             continue
-        text = str(item).strip()
-        # Strip outer brackets if present
-        if text.startswith("[") and text.endswith("]"):
-            text = text[1:-1].strip()
+        text = str(item).strip().replace("[", "").replace("]", "").replace("\"", "")
         # Split by comma and clean quotes/spaces
         parts = [p.strip().strip('"').strip("'") for p in text.split(",")]
         for p in parts:

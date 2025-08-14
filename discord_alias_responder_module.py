@@ -1,5 +1,4 @@
 # Python
-# File: discord_alias_responder.py
 import logging
 import re
 from dataclasses import dataclass
@@ -68,15 +67,78 @@ class DiscordAliasResponder:
 
     @staticmethod
     def extract_triggers(message: str) -> List[str]:
-        # Returns tokens inside [[...]] in order of appearance
-        return [m.group(1).strip() for m in TRIGGER_RE.finditer(message or "") if m.group(1).strip()]
+        """
+        Primary: extract [[token]] sequences.
+        Fallback (if none found): treat the whole message as a short list of tokens
+        separated by commas/pipes/newlines (e.g., 'Livestock, Steak').
+        """
+        raw = message or ""
+        # Primary: [[...]] triggers
+        tokens = [m.group(1).strip() for m in TRIGGER_RE.finditer(raw) if m.group(1).strip()]
+        if tokens:
+            logger.debug("extract_triggers: bracketed tokens=%r", tokens)
+            return tokens
+
+        # Fallback: parse simple lists only if the message looks like a token list
+        fb = DiscordAliasResponder._extract_fallback_token_list(raw)
+        logger.debug("extract_triggers: fallback tokens=%r", fb)
+        return fb
+
+    @staticmethod
+    def _extract_fallback_token_list(raw: str) -> List[str]:
+        """
+        Heuristic fallback for messages that look like a short list of tokens.
+        Keeps it conservative to avoid triggering in normal sentences.
+        Rules:
+        - Split by comma, pipe, slash or newline
+        - Accept between 1 and 8 items
+        - Each item trimmed; 1..60 chars
+        - Drop items that look like URLs
+        - If the message contains typical sentence punctuation and no separators,
+          treat it as not-a-list and return []
+        """
+        text = (raw or "").strip()
+        if not text:
+            logger.debug("fallback: empty message")
+            return []
+
+        # If it already contains brackets, don’t double-parse here.
+        if "[[" in text and "]]" in text:
+            logger.debug("fallback: found bracket markers; skipping fallback")
+            return []
+
+        # If there are no obvious list separators and the text looks like a sentence, abort
+        has_separators = any(sep in text for sep in (",", "|", "/", "\n"))
+        looks_like_sentence = bool(re.search(r"[.!?]\s|^\w+\s+\w+\s+\w+", text))
+        if not has_separators and looks_like_sentence:
+            logger.debug("fallback: text looks like sentence without separators; skipping")
+            return []
+
+        parts = [p.strip() for p in re.split(r"[,\|/\n]+", text) if p.strip()]
+        logger.debug("fallback: split parts(raw)=%r", parts)
+
+        if not (1 <= len(parts) <= 8):
+            logger.debug("fallback: parts count out of range (%d); skipping", len(parts))
+            return []
+
+        cleaned: List[str] = []
+        for p in parts:
+            if "http://" in p or "https://" in p:
+                logger.debug("fallback: dropping URL-like part: %r", p)
+                continue
+            if not (1 <= len(p) <= 60):
+                logger.debug("fallback: dropping due to length (%d): %r", len(p), p)
+                continue
+            cleaned.append(p)
+
+        logger.debug("fallback: cleaned=%r", cleaned)
+        return cleaned
 
     @staticmethod
     def _log_sanitized(prefix: str, text: str) -> None:
         if text is None:
             logger.debug("%s <none>", prefix)
             return
-        # Avoid pings and huge payloads in logs
         safe = text.replace("@", "@\u200b").replace("\n", "\\n")
         if len(safe) > 300:
             safe = safe[:300] + "...<truncated>"
@@ -84,8 +146,8 @@ class DiscordAliasResponder:
 
     def handle_message(self, message: str) -> Optional[str]:
         """
-        Given a Discord message, returns a reply string if any [[...]] triggers are found.
-        If nothing to reply with, returns None.
+        Given a Discord message, returns a reply string if any triggers are found.
+        Triggers: [[...]] or, if none, a conservative fallback list like 'A, B, C'.
         """
         self._log_sanitized("Incoming message:", message)
 
@@ -96,7 +158,6 @@ class DiscordAliasResponder:
             logger.debug("No tokens found; skipping reply")
             return None
 
-        # Preserve order but avoid duplicate lookups for identical tokens in the same message
         seen = set()
         results: List[str] = []
 
@@ -122,15 +183,3 @@ class DiscordAliasResponder:
         reply = f"{body}{footer}"
         self._log_sanitized("Composed reply:", reply)
         return reply
-
-
-# Example CLI usage (optional):
-# python -m discord_alias_responder "I like [[Pets]] and [[Space Elevator]]"
-if __name__ == "__main__":
-    import sys
-    if len(sys.argv) < 3:
-        print("Usage: python discord_alias_responder.py <cards_csv_path> <message>")
-        sys.exit(1)
-    responder = DiscordAliasResponder.from_csv(sys.argv[1], reply_footer="")
-    reply = responder.handle_message(" ".join(sys.argv[2:]))
-    print(reply or "")
